@@ -1,0 +1,3 @@
+G:\CLion\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\OSfile.dir/objects.a
+G:\mingw32\bin\ar.exe cr CMakeFiles\OSfile.dir/objects.a @CMakeFiles\OSfile.dir\objects1.rsp
+G:\mingw32\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\OSfile.dir/objects.a -Wl,--no-whole-archive  -o OSfile.exe -Wl,--out-implib,libOSfile.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\OSfile.dir\linklibs.rsp
