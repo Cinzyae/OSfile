@@ -15,6 +15,13 @@
 void cmd_ls(char *content) {
     printf("run ls:\n");
     int inode = 0;
+    char *next = parse_content(content);
+    printf("after parse:\n");
+    printf("    content:%s\n", content);
+    printf("    next:%s\n", next);
+    if (next != (void *) 0) {
+        cmd_ls(next);
+    }
     // TODO : 分析content，查看传入的文件夹
 }
 
@@ -38,9 +45,10 @@ void cmd_touch(char *content) {
     printf("run touch\n");
     //读sp_block块,sp_block查空，修改sp_block块，返回可修改inode块序号
     int ninode = 0;
-    set_sp_block(TYPE_FILE, 0);
+    int ndata = 0;
+    set_sp_block(TYPE_FILE, &ninode, &ndata);
     //查看根目录
-    if (check_home(ninode, TYPE_FILE, content) < 0) {
+    if (touch_sub(ninode, ndata, TYPE_FILE, content) < 0) {
         printf("touch file fail.\n");
         return;
     } else {
@@ -85,21 +93,6 @@ void cmd_test(char *content) {
     free(q);
 }
 
-void parseline(char *str, char *strSorted[], int strSortedLen) {
-    char *p;
-    int len = 0;
-    char whitespace[] = " \t\r\n\v";
-    for (p = str; strchr(whitespace, *p); p++);
-    while (*p && len <= strSortedLen) {
-        strSorted[len++] = p;
-        while (*p && !strchr(whitespace, *p))
-            p++;
-        while (strchr(whitespace, *p))
-            *p++ = '\0';
-    }
-    strSorted[len] = 0;
-}
-
 int getcmd(char *buf, int nbuf) {
     printf("*");
     memset(buf, 0, nbuf);
@@ -112,7 +105,6 @@ int getcmd(char *buf, int nbuf) {
 void runcmd(char *buf) {
     char whitespace[] = " \t\r\n\v";
     char *p = buf;
-    //parseline(buf, execcmd, MAXARGS + 1);
     char *order = p;
     char *content;
     while (strchr(whitespace, *p++) == 0) {
@@ -136,3 +128,29 @@ void runcmd(char *buf) {
         cmd_test(content);
     }
 }
+
+char *parse_content(char *content) {
+    char whitespace[] = " \t\r\n\v\\/";
+    char *p = content;
+    char *next = NULL;
+    while (strchr(whitespace, *p++) == 0) {
+        next = p;
+    }
+    memset(next++, 0, 1);
+    // TODO : fix next
+    return next;
+}
+//void parseline(char *str, char *strSorted[], int strSortedLen) {
+//    char *p;
+//    int len = 0;
+//    char whitespace[] = " \t\r\n\v";
+//    for (p = str; strchr(whitespace, *p); p++);
+//    while (*p && len <= strSortedLen) {
+//        strSorted[len++] = p;
+//        while (*p && !strchr(whitespace, *p))
+//            p++;
+//        while (strchr(whitespace, *p))
+//            *p++ = '\0';
+//    }
+//    strSorted[len] = 0;
+//}

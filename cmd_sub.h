@@ -7,9 +7,9 @@
 
 #include "filesys.h"
 
-int check_home(int ninode, uint16_t file_type, char *content);
+int touch_sub(int ninode, int ndata, uint16_t file_type, char *content);
 
-int set_sp_block(uint16_t file_type, int *ninode);
+int set_sp_block(uint16_t file_type, int *ninode, int *ndata);
 
 int set_inode_block(uint16_t file_type, int *nblock, int *ninode);
 

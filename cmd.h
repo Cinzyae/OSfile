@@ -20,12 +20,12 @@ void cmd_cp();
 //关闭系统
 void cmd_shutdown();
 
-void parseline(char *str, char *strSorted[], int strSortedLen);
-
 int getcmd(char *buf, int nbuf);
 
 void runcmd(char *buf);
 
 void cmd_test(char *content);
+
+char * parse_content(char *content);
 
 #endif //OSFILE_CMD_H
