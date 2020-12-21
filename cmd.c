@@ -34,10 +34,18 @@ void cmd_mkdir(char *content) {
 }
 
 //创建文件
-void cmd_touch() {
-    // TODO : 分析content，查看传入的文件夹
-
-    //读sp_block块,sp_block查空，修改sp_block块
+void cmd_touch(char *content) {
+    printf("run touch\n");
+    //读sp_block块,sp_block查空，修改sp_block块，返回可修改inode块序号
+    int ninode = 0;
+    set_sp_block(TYPE_FILE, 0);
+    //查看根目录
+    if (check_home(ninode, TYPE_FILE, content) < 0) {
+        printf("touch file fail.\n");
+        return;
+    } else {
+        printf("here is free space in home dir.\n");
+    }
     //修改inode块，修改对应data块为data_item
     //写data块
     //返回
@@ -93,8 +101,7 @@ void parseline(char *str, char *strSorted[], int strSortedLen) {
 }
 
 int getcmd(char *buf, int nbuf) {
-//    fprintf(2, "@ ");
-    printf("* ");
+    printf("*");
     memset(buf, 0, nbuf);
     gets_ulib(buf, nbuf);
     if (buf[0] == 0)
@@ -121,6 +128,10 @@ void runcmd(char *buf) {
         cmd_mkdir(content);
     } else if (strcmp(order, "shutdown") == 0) {
         cmd_shutdown();
+    } else if (strcmp(order, "touch") == 0) {
+        cmd_touch(content);
+    } else if (strcmp(order, "cp") == 0) {
+        cmd_cp();
     } else if (strcmp(order, "test") == 0) {
         cmd_test(content);
     }

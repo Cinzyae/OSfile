@@ -8,6 +8,7 @@
  *
  * inode block size:256 bits = 32 B
  * inode block number:1024
+ * inode block number per Mem_block:32
  * inode block total:32 KB
  *
  * dir_item block size:128 B
@@ -43,14 +44,14 @@ typedef struct super_block {
 //total one Mem_block
 
 typedef struct inodeS {
-    uint32_t size;           // 文件大小
+    uint32_t size;           // 文件大小 [0,48]
     uint16_t file_type;      // 文件类型
-    uint16_t link;           // 连接数
-    uint32_t block_point[INODE_POINT_NUM]; // 数据块指针
+    uint16_t link;           // 连接数 [0,48]
+    uint32_t block_point[INODE_POINT_NUM]; // 数据块指针 contain 6*8=48 dir_item
 } inode;
 //256 bits one inode;total 32 Mem_block
 
-typedef struct dir_itemS {
+typedef struct dir_item_struct {
     uint32_t inode_id; // 当前目录项表示的文件/目录的对应inode
     uint16_t valid;      // 当前目录项是否有效
     uint8_t type;        // 当前目录项类型（文件/目录）
@@ -58,9 +59,23 @@ typedef struct dir_itemS {
 } dir_item;
 //1024 bits
 
+typedef struct inode_list_struct {
+    inode inodes[32];
+} ino_list;
+
+typedef struct dir_list_struct {
+    dir_item dir_items[8];
+} dir_list;
+
 int write_block(unsigned int block_num, uint32_t *p);
 
 int read_block(unsigned int block_num, uint32_t *p);
+
+int find_inode_block(int ninode);
+
+int read_inode(int ninode, uint32_t *p) ;
+
+int write_inode(int ninode, uint32_t *p) ;
 
 void init_superBlock(sp_block *superBlock);
 

@@ -18,6 +18,22 @@ int read_block(unsigned int block_num, uint32_t *p) {
     disk_read_block(mem_block_num + 1, (char *) (p + 16));
 }
 
+int find_inode_block(int ninode) {
+    return ninode / 32 + 1;//add one sp_block
+}
+
+//传入一个inode，返回它所在的数据块
+int read_inode(int ninode, uint32_t *p) {
+    int ninode_block = find_inode_block(ninode);
+    read_block(ninode_block, p);
+}
+
+//根据inode所在的数据块写
+int write_inode(int ninode, uint32_t *p) {
+    int ninode_block = find_inode_block(ninode);
+    write_block(ninode_block, p);
+}
+
 void init_superBlock(sp_block *superBlock) {
     superBlock->magic_num = Ext2;
     superBlock->free_block_count = 4063;//4096-1-32

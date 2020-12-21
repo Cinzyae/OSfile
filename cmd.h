@@ -12,7 +12,7 @@ void cmd_ls(char *content);
 void cmd_mkdir(char *content);
 
 //创建文件
-void cmd_touch();
+void cmd_touch(char *content);
 
 //复制文件
 void cmd_cp();
