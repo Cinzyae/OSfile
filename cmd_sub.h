@@ -13,6 +13,8 @@ int show_folder(int ninode);
 
 int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, char *content);
 
-int set_sp_block(uint16_t file_type, int *ninode, int *ndata);
+int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata);
+
+void printf_sp_block(int i);
 
 #endif //OSFILE_CMD_SUB_H

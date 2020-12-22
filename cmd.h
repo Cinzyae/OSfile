@@ -28,4 +28,6 @@ void cmd_test(char *content);
 
 char *parse_content(char *content);
 
+void root();
+
 #endif //OSFILE_CMD_H

@@ -81,7 +81,7 @@ void init_superBlock(sp_block *superBlock);
 
 void init_inode(inode *inodeList);
 
-void init_sys();
+int init_sys();
 
 void shutdown_sys();
 

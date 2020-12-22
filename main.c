@@ -4,6 +4,7 @@
 #include "filesys.h"
 
 #define BUFSIZE 128
+
 /*
  * main:        运行程序
  * cmd:         命令相关
@@ -14,7 +15,9 @@
  */
 int main() {
     printf("ex2 starts\n");
-    init_sys();
+    if (init_sys()) {
+        root();
+    }
     static char buf[BUFSIZE];
     while (getcmd(buf, BUFSIZE) >= 0) {
         buf[strlen(buf) - 1] = 0;
@@ -24,3 +27,4 @@ int main() {
 }
 
 // TODO : 检查返回值
+// TODO : 给inode分配6个块或者多分配一个数据块

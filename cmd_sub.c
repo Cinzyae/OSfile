@@ -99,11 +99,13 @@ int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, cha
     //修改inode
     p->inodes[inode_num_list].size += 1;
     p->inodes[inode_num_list].link += 1;
-//-----
-    //读取、修改dir
     int group = free_dir / 8;
     int rest = free_dir % 8;
     int data_block = p->inodes[inode_num_list].block_point[group];
+    write_inode(ninode, (uint32_t *) p);
+    free(p);
+//-----
+    //读取、修改dir
     dir_list *q = NULL;
     q = malloc(sizeof(dir_list));
     read_block(data_block, (uint32_t *) q);
@@ -111,30 +113,24 @@ int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, cha
     q->dir_items[rest].type = file_type;
     q->dir_items[rest].valid = 1;
     strcpy(q->dir_items[rest].name, content);
+    write_block(data_block, (uint32_t *) q);
+    free(q);
 //-----
     //读取、修改new_inode
     ino_list *p2 = NULL;
     p2 = malloc(sizeof(ino_list));
     read_inode(new_ninode, (uint32_t *) p2);
     int p2_num_list = new_ninode % 32;
-    p2->inodes[p2_num_list].size = 8;
+    p2->inodes[p2_num_list].size += 8;
     p2->inodes[p2_num_list].file_type = file_type;
-    p2->inodes[p2_num_list].link = 1;
+    p2->inodes[p2_num_list].link += 1;
     p2->inodes[p2_num_list].block_point[0] = new_ndata;
-//-----
-    //善后
-    write_inode(ninode, (uint32_t *) p);
-    write_block(data_block, (uint32_t *) q);
-    write_inode(new_ninode, (uint32_t *) p2);// TODO : write conflict
-    free(p);
-    free(q);
+    write_inode(new_ninode, (uint32_t *) p2);
     free(p2);
     return 0;
 }
 
-int set_sp_block(uint16_t file_type, int *ninode, int *ndata) {
-    int i, block_map, inode_map;
-
+int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata) {
     //读sp_block块
     sp_block *p = NULL;
     p = malloc(MEM_BLOCK_SIZE);
@@ -144,8 +140,8 @@ int set_sp_block(uint16_t file_type, int *ninode, int *ndata) {
     if (!(p->free_block_count) || !(p->free_inode_count))
         return -1;
     //修改sp_block块
-    *ninode = p->free_inode_count;
-    *ndata = p->free_block_count;
+    *new_ninode = p->free_inode_count;
+    *new_ndata = p->free_block_count;
     (p->free_block_count) -= 1;
     (p->free_inode_count) -= 1;
     if (file_type == TYPE_FOLDER)
@@ -155,4 +151,18 @@ int set_sp_block(uint16_t file_type, int *ninode, int *ndata) {
     write_block(0, (uint32_t *) p);
     free(p);
     return 0;
+}
+
+void printf_sp_block(int i) {
+    printf("\n-----------------\n");
+    printf("%d", i);
+    sp_block *q = NULL;
+    q = malloc(MEM_BLOCK_SIZE);
+    read_block(0, (uint32_t *) q);
+    printf("magic_num:%d\t", q->magic_num);
+    printf("free_block_count:%d\t", q->free_block_count);
+    printf("free_inode_count:%d\t", q->free_inode_count);
+    printf("dir_inode_count:%d\t", q->dir_inode_count);
+    printf("\n-----------------\n");
+    free(q);
 }

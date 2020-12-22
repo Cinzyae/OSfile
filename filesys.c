@@ -35,6 +35,7 @@ int write_inode(int ninode, uint32_t *p) {
 }
 
 void init_superBlock(sp_block *superBlock) {
+    memset(superBlock, 0, MEM_BLOCK_SIZE);
     superBlock->magic_num = Ext2;
     superBlock->free_block_count = 4063;//4096-1-32
     superBlock->free_inode_count = 1024;
@@ -45,18 +46,19 @@ void init_superBlock(sp_block *superBlock) {
 }
 
 void init_inode(inode *inodeList) {
-    int i, j;
-    for (i = 0; i < 1024; i++) {
-        inodeList[i].size = 0;
-        inodeList[i].file_type = 0;
-        inodeList[i].link = 0;
-        for (j = 0; j < 6; j++) {
-            inodeList[i].block_point[j] = 0;
-        }
-    }
+    memset(inodeList, 0, 32 * MEM_BLOCK_SIZE);
+//    int i, j;
+//    for (i = 0; i < 1024; i++) {
+//        inodeList[i].size = 0;
+//        inodeList[i].file_type = 0;
+//        inodeList[i].link = 0;
+//        for (j = 0; j < 6; j++) {
+//            inodeList[i].block_point[j] = 0;
+//        }
+//    }
 }
 
-void init_sys() {
+int init_sys() {
     if (open_disk()) {
         char *sysbase = malloc(33 * MEM_BLOCK_SIZE);//sizeof(sp_block) + 1024 * sizeof(inode)
         init_superBlock((sp_block *) sysbase);
@@ -68,7 +70,9 @@ void init_sys() {
             p += 32;
         }
         free(sysbase);
+        return 1;
     }
+    return 0;
 }
 
 void shutdown_sys() {

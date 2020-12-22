@@ -35,8 +35,8 @@ void cmd_ls(char *content, int ninode) {
         return;
     } else {
         // 展示文件夹
+        printf("show folder:");
         show_folder(inode_next);
-        printf("show folder");
     }
 }
 
@@ -44,41 +44,26 @@ void cmd_ls(char *content, int ninode) {
 void cmd_mkdir(char *content, int ninode) {
     printf("run mkdir:\n");
     char *next = parse_content(content);
-    printf("after parse:\n");
-    printf("    content:%s\tnext:%s\n", content, next);
+    printf("\tafter parse:\tcontent:%s\tnext:%s\n", content, next);
     int inode_next = find_next_inode(ninode, content);
-    switch (inode_next) {
-        case -1://无文件夹
-            printf("folder empty!\n");
-            break;
-        case 0://无文件夹
-            printf("no such sub_folder!\n");
-            break;
-        default://有文件夹
-//            if (*next != '\0') {
-//                // 如果仍然有下一个待访问子文件夹则递归
-//                cmd_mkdir(next, inode_next);
-//                return;
-//            } else {
-//                int new_ninode = 0;
-//                int new_ndata = 0;
-//                set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
-//                if (build_new(ninode, new_ninode, new_ndata, TYPE_FOLDER, content) < 0) {
-//                    printf("mkdir folder fail.\n");
-//                    return;
-//                } else {
-//                    printf("here is free space in dir%d.\n", ninode);
-//                }
-//            }
-            break;
+    if ((inode_next <= 0) && (*next == '\0')) {//无文件夹，无待访问——冲
+        printf("make new folder\n");
+        int new_ninode = 0;
+        int new_ndata = 0;
+        set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
+        if (build_new(ninode, new_ninode, new_ndata, TYPE_FOLDER, content) < 0) {
+            printf("mkdir folder fail.\n");
+            return;
+        }
+    } else if ((inode_next > 0) && (*next != '\0')) {//有文件夹，有待访问——冲
+        printf("run mkdir:\n");
+        cmd_mkdir(next, inode_next);
+        return;
     }
     // TODO : 分情况
-    //无文件夹，无待访问——冲
     //无文件夹，有待访问——错
-    //有文件夹，有待访问——冲
     //有文件夹，无待访问——错
 }
-
 
 //创建文件
 void cmd_touch(char *content) {
@@ -94,9 +79,6 @@ void cmd_touch(char *content) {
     } else {
         printf("here is free space in home dir.\n");
     }
-    //修改inode块，修改对应data块为data_item
-    //写data块
-    //返回
 }
 
 //复制文件
@@ -115,20 +97,13 @@ void cmd_shutdown() {
 
 void cmd_test(char *content) {
     printf("run test\n");
-    inode *p = NULL;
-    p = malloc(MEM_BLOCK_SIZE);
-    p->size = 1;
-    p->file_type = TYPE_FILE;
-    p->link = 1;
-    write_block(33, (uint32_t *) p);
-    free(p);
-
-    inode *q = NULL;
+    sp_block *q = NULL;
     q = malloc(MEM_BLOCK_SIZE);
-    read_block(33, (uint32_t *) q);
-    printf("block size:%d\n", q->size);
-    printf("file type:%d\n", q->file_type);
-    printf("link:%d\n", q->link);
+    read_block(0, (uint32_t *) q);
+    printf("magic_num:%d\t", q->magic_num);
+    printf("free_block_count:%d\t", q->free_block_count);
+    printf("free_inode_count:%d\t", q->free_inode_count);
+    printf("dir_inode_count:%d\t\n", q->dir_inode_count);
     free(q);
 }
 
@@ -176,4 +151,20 @@ char *parse_content(char *content) {
     }
     memset(next++, 0, 1);
     return next;
+}
+
+void root() {
+    int new_ninode = 0;
+    int new_ndata = 0;
+    set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
+
+    ino_list *p = NULL;
+    p = malloc(sizeof(ino_list));
+    read_inode(0, (uint32_t *) p);
+    p->inodes[0].file_type = TYPE_FOLDER;
+    p->inodes[0].size = 0;
+    p->inodes[0].link = 0;
+    p->inodes[0].block_point[0] = new_ndata;
+    write_inode(0, (uint32_t *) p);
+    free(p);
 }
