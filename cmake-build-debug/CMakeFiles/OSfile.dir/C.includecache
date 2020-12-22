@@ -32,6 +32,16 @@ G:/projects/OSfile/filesys.h
 stdint.h
 -
 
+G:/projects/OSfile/main.c
+mem.h
+-
+stdio.h
+-
+cmd.h
+G:/projects/OSfile/cmd.h
+filesys.h
+G:/projects/OSfile/filesys.h
+
 G:/projects/OSfile/ulib.h
 stdint.h
 -

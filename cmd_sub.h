@@ -7,6 +7,8 @@
 
 #include "filesys.h"
 
+int ls_sub(int ninode, char *content);
+
 int touch_sub(int ninode, int ndata, uint16_t file_type, char *content);
 
 int set_sp_block(uint16_t file_type, int *ninode, int *ndata);

@@ -12,17 +12,29 @@
 #define MAXARGS 10
 
 //展示读取文件夹内容
-void cmd_ls(char *content) {
+void cmd_ls(char *content, int ninode) {
     printf("run ls:\n");
-    int inode = 0;
     char *next = parse_content(content);
+    memset(next++, 0, 1);
     printf("after parse:\n");
-    printf("    content:%s\n", content);
-    printf("    next:%s\n", next);
-    if (next != (void *) 0) {
-        cmd_ls(next);
+    printf("    content:%s\tnext:%s\n", content, next);
+    int inode_next = ls_sub(ninode, content);
+    if (inode_next == -1) {
+        printf("folder empty!\n");
+        return;
+    } else if (inode_next == 0) {
+        printf("no such sub_folder!\n");
+        return;
     }
-    // TODO : 分析content，查看传入的文件夹
+
+    if (*next != '\0') {
+        // 如果仍然有下一个带访问子文件夹则递归
+        cmd_ls(next, inode_next);
+        return;
+    } else {
+        //TODO : 展示文件夹
+        printf("show folder");
+    }
 }
 
 //创建文件夹
@@ -30,7 +42,6 @@ void cmd_mkdir(char *content) {
     printf("run mkdir:\n");
     int block = 0;
     int inode = 0;
-    // TODO : 分析content，查看传入的文件夹
     //set_sp_block(TYPE_FOLDER, &block, &inode);
     //set_inode_block(TYPE_FOLDER, &block, &inode);
 
@@ -42,7 +53,7 @@ void cmd_mkdir(char *content) {
 
 //创建文件
 void cmd_touch(char *content) {
-    printf("run touch\n");
+    printf("run touch:\n");
     //读sp_block块,sp_block查空，修改sp_block块，返回可修改inode块序号
     int ninode = 0;
     int ndata = 0;
@@ -61,7 +72,6 @@ void cmd_touch(char *content) {
 
 //复制文件
 void cmd_cp() {
-    // TODO : 分析content，查看传入的文件夹
 
     //读sp_block块,sp_block查空，修改sp_block块
     //修改inode块，修改对应data块为data_item
@@ -111,11 +121,9 @@ void runcmd(char *buf) {
         content = p;
     }
     memset(content++, 0, 1);
-    printf("order:%s\n", order);
-    printf("content:%s\n", content);
-
+    printf("\torder:%s\tcontent:%s\n", order, content);
     if (strcmp(order, "ls") == 0) {
-        cmd_ls(content);
+        cmd_ls(content, 0);
     } else if (strcmp(order, "mkdir") == 0) {
         cmd_mkdir(content);
     } else if (strcmp(order, "shutdown") == 0) {
@@ -130,13 +138,12 @@ void runcmd(char *buf) {
 }
 
 char *parse_content(char *content) {
-    char whitespace[] = " \t\r\n\v\\/";
+    char whitespace[] = " /";
     char *p = content;
     char *next = NULL;
     while (strchr(whitespace, *p++) == 0) {
         next = p;
     }
-    memset(next++, 0, 1);
     // TODO : fix next
     return next;
 }

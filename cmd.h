@@ -6,7 +6,7 @@
 #define OSFILE_CMD_H
 
 //展示读取文件夹内容
-void cmd_ls(char *content);
+void cmd_ls(char *content, int ninode);
 
 //创建文件夹
 void cmd_mkdir(char *content);
@@ -26,6 +26,6 @@ void runcmd(char *buf);
 
 void cmd_test(char *content);
 
-char * parse_content(char *content);
+char *parse_content(char *content);
 
 #endif //OSFILE_CMD_H
