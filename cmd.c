@@ -9,11 +9,14 @@
 #include "filesys.h"
 #include "cmd_sub.h"
 
-#define MAXARGS 10
-
 //展示读取文件夹内容
 void cmd_ls(char *content, int ninode) {
     printf("run ls:\n");
+    if (*content == '\0') {
+        show_folder(ninode);
+        return;
+    }
+
     char *next = parse_content(content);
     memset(next++, 0, 1);
     printf("after parse:\n");
@@ -33,6 +36,7 @@ void cmd_ls(char *content, int ninode) {
         return;
     } else {
         //TODO : 展示文件夹
+        show_folder(inode_next);
         printf("show folder");
     }
 }
@@ -144,7 +148,6 @@ char *parse_content(char *content) {
     while (strchr(whitespace, *p++) == 0) {
         next = p;
     }
-    // TODO : fix next
     return next;
 }
 //void parseline(char *str, char *strSorted[], int strSortedLen) {

@@ -1,6 +1,7 @@
 //
 // Created by MACHENIKE on 12/21/2020.
 //
+#include <stdio.h>
 #include <stdint.h>
 #include <malloc.h>
 #include <mem.h>
@@ -35,7 +36,7 @@ int ls_sub(int ninode, char *content) {
         }
         free(q);
     }
-    int data_block = p->inodes[p_num_list].block_point[i];
+    int data_block = p->inodes[p_num_list].block_point[group];
     dir_list *q = NULL;
     q = malloc(sizeof(dir_list));
     read_block(data_block, (uint32_t *) q);
@@ -43,6 +44,38 @@ int ls_sub(int ninode, char *content) {
         if (strcmp(q->dir_items[group].name, content) == 0) {
             return q->dir_items[j].inode_id;
         }
+    }
+    //善后
+    free(q);
+    free(p);
+    return 0;
+}
+
+int show_folder(int ninode) {
+    int i, j;
+    ino_list *p = NULL;
+    p = malloc(sizeof(ino_list));
+    read_inode(ninode, (uint32_t *) p);
+    int p_num_list = ninode % 32;
+    int size = p->inodes[p_num_list].size;
+    int group = size / 8;
+    int rest = size % 8;
+    for (i = 0; i < group; i++) {
+        int data_block = p->inodes[p_num_list].block_point[i];
+        dir_list *q = NULL;
+        q = malloc(sizeof(dir_list));
+        read_block(data_block, (uint32_t *) q);
+        for (j = 0; j < 8; j++) {
+            printf("\t\ttype:%d,name:%s\n", q->dir_items[j].type, q->dir_items[j].name);
+        }
+        free(q);
+    }
+    int data_block = p->inodes[p_num_list].block_point[group];
+    dir_list *q = NULL;
+    q = malloc(sizeof(dir_list));
+    read_block(data_block, (uint32_t *) q);
+    for (j = 0; j < rest; j++) {
+        printf("\t\ttype:%d,name:%s\n", q->dir_items[j].type, q->dir_items[j].name);
     }
     //善后
     free(q);
@@ -118,7 +151,7 @@ int set_sp_block(uint16_t file_type, int *ninode, int *ndata) {
     if (file_type == TYPE_FOLDER)
         p->dir_inode_count += 1;
 // TODO : modify maps (bits)
-    //写sp_block块
+    //善后
     write_block(0, (uint32_t *) p);
     free(p);
     return 0;
