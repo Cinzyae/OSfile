@@ -17,4 +17,6 @@ int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata);
 
 void printf_sp_block(int i);
 
+void printf_inode_block(int ninode, int i);
+
 #endif //OSFILE_CMD_SUB_H

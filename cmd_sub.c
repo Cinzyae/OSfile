@@ -13,7 +13,9 @@ int find_next_inode(int ninode, char *content) {
     //读取ninode
     //如果该inode块大小为零，表示没有子文件夹，返回-1
     ino_list *p = NULL;
-    p = malloc(sizeof(ino_list));
+    printf_inode_block(1023, 0);
+    p = malloc(MEM_BLOCK_SIZE);
+    printf_inode_block(1023, 1);
     read_inode(ninode, (uint32_t *) p);
     int p_num_list = ninode % 32;
     int size = p->inodes[p_num_list].size;
@@ -121,10 +123,10 @@ int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, cha
     p2 = malloc(sizeof(ino_list));
     read_inode(new_ninode, (uint32_t *) p2);
     int p2_num_list = new_ninode % 32;
-    p2->inodes[p2_num_list].size += 8;
+    p2->inodes[p2_num_list].size += 1;
     p2->inodes[p2_num_list].file_type = file_type;
     p2->inodes[p2_num_list].link += 1;
-    p2->inodes[p2_num_list].block_point[0] = new_ndata;
+    p2->inodes[p2_num_list].block_point[0] = new_ndata;//
     write_inode(new_ninode, (uint32_t *) p2);
     free(p2);
     return 0;
@@ -155,7 +157,7 @@ int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata) {
 
 void printf_sp_block(int i) {
     printf("\n-----------------\n");
-    printf("%d", i);
+    printf("%d\n", i);
     sp_block *q = NULL;
     q = malloc(MEM_BLOCK_SIZE);
     read_block(0, (uint32_t *) q);
@@ -165,4 +167,20 @@ void printf_sp_block(int i) {
     printf("dir_inode_count:%d\t", q->dir_inode_count);
     printf("\n-----------------\n");
     free(q);
+}
+
+void printf_inode_block(int ninode, int i) {
+    printf("\n&&\n");
+    printf("mark:%d\n", i);
+    ino_list *pp = NULL;
+    pp = malloc(sizeof(ino_list));
+    read_inode(ninode, (uint32_t *) pp);
+    int pp_num_list = ninode % 32;
+    printf("inode:%d\n", ninode);
+    printf("size:%d\t", pp->inodes[pp_num_list].size);
+    printf("file_type:%d\t", pp->inodes[pp_num_list].file_type);
+    printf("link:%d\t", pp->inodes[pp_num_list].link);
+    printf("block_point[0]:%d\n", pp->inodes[pp_num_list].block_point[0]);
+    printf("&&\n");
+    free(pp);
 }

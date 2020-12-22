@@ -3,13 +3,12 @@
 //
 
 #include <io.h>
-#include <malloc.h>
 #include "ulib.h"
 
 char *gets_ulib(char *buf, int max) {
     int i, cc;
     char c;
-    // TODO : DEBUG to enter exec
+    //DEBUG to enter exec
     for (i = 0; i + 1 < max;) {
         cc = read(0, &c, 1);
         if (cc < 1)

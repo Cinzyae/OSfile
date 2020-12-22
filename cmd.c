@@ -5,9 +5,8 @@
 #include <stdio.h>
 #include <malloc.h>
 #include "cmd.h"
-#include "ulib.h"
-#include "filesys.h"
 #include "cmd_sub.h"
+#include "ulib.h"
 
 //展示读取文件夹内容
 void cmd_ls(char *content, int ninode) {
@@ -16,10 +15,8 @@ void cmd_ls(char *content, int ninode) {
         show_folder(ninode);
         return;
     }
-
     char *next = parse_content(content);
-    printf("after parse:\n");
-    printf("    content:%s\tnext:%s\n", content, next);
+    printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
     int inode_next = find_next_inode(ninode, content);
     if (inode_next == -1) {
         printf("folder empty!\n");
@@ -28,14 +25,13 @@ void cmd_ls(char *content, int ninode) {
         printf("no such sub_folder!\n");
         return;
     }
-
     if (*next != '\0') {
         // 如果仍然有下一个待访问子文件夹则递归
         cmd_ls(next, inode_next);
         return;
     } else {
         // 展示文件夹
-        printf("show folder:");
+        printf("show folder:\n");
         show_folder(inode_next);
     }
 }
@@ -43,26 +39,32 @@ void cmd_ls(char *content, int ninode) {
 //创建文件夹
 void cmd_mkdir(char *content, int ninode) {
     printf("run mkdir:\n");
+    if (*content == '\0') {
+        printf("need a folder name\n");
+        return;
+    }
     char *next = parse_content(content);
-    printf("\tafter parse:\tcontent:%s\tnext:%s\n", content, next);
+    printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
     int inode_next = find_next_inode(ninode, content);
     if ((inode_next <= 0) && (*next == '\0')) {//无文件夹，无待访问——冲
         printf("make new folder\n");
         int new_ninode = 0;
         int new_ndata = 0;
         set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
-        if (build_new(ninode, new_ninode, new_ndata, TYPE_FOLDER, content) < 0) {
+        int flag = build_new(ninode, new_ninode, new_ndata, TYPE_FOLDER, content);
+        if (flag < 0) {
             printf("mkdir folder fail.\n");
             return;
         }
     } else if ((inode_next > 0) && (*next != '\0')) {//有文件夹，有待访问——冲
-        printf("run mkdir:\n");
+        printf("cd %s:\n", content);
         cmd_mkdir(next, inode_next);
         return;
+    } else {
+        //无文件夹，有待访问——错
+        //有文件夹，无待访问——错
+        printf("wrong\n");
     }
-    // TODO : 分情况
-    //无文件夹，有待访问——错
-    //有文件夹，无待访问——错
 }
 
 //创建文件
@@ -125,7 +127,7 @@ void runcmd(char *buf) {
         content = p;
     }
     memset(content++, 0, 1);
-    printf("\torder:%s\tcontent:%s\n", order, content);
+    printf("order:%s\tcontent:%s\n-------\n", order, content);
     if (strcmp(order, "ls") == 0) {
         cmd_ls(content, 0);
     } else if (strcmp(order, "mkdir") == 0) {
@@ -139,6 +141,7 @@ void runcmd(char *buf) {
     } else if (strcmp(order, "test") == 0) {
         cmd_test(content);
     }
+    printf("-------\n");
 }
 
 //传入命令，返回/后一位的指针

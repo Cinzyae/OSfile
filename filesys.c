@@ -60,16 +60,26 @@ void init_inode(inode *inodeList) {
 
 int init_sys() {
     if (open_disk()) {
-        char *sysbase = malloc(33 * MEM_BLOCK_SIZE);//sizeof(sp_block) + 1024 * sizeof(inode)
+//        char *sysbase = malloc(33 * MEM_BLOCK_SIZE);//sizeof(sp_block) + 1024 * sizeof(inode)
+//        init_superBlock((sp_block *) sysbase);
+//        init_inode((inode *) (sysbase + MEM_BLOCK_SIZE));//+ sizeof(sp_block)
+//        int i;
+//        uint32_t *p = (uint32_t *) sysbase;
+//        for (i = 0; i < 33; i++) {
+//            write_block(i, p);
+//            p += 32;
+//        }
+//        free(sysbase);
+        char *sysbase = malloc(MEM_BLOCK_SIZE);
         init_superBlock((sp_block *) sysbase);
-        init_inode((inode *) (sysbase + MEM_BLOCK_SIZE));//+ sizeof(sp_block)
-        int i;
-        uint32_t *p = (uint32_t *) sysbase;
-        for (i = 0; i < 33; i++) {
-            write_block(i, p);
-            p += 32;
-        }
+        write_block(0, (uint32_t *) sysbase);
         free(sysbase);
+        int i;
+        char *p = malloc(MEM_BLOCK_SIZE);
+        memset(p, 0, MEM_BLOCK_SIZE);
+        for (i = 1; i < 4096; i++) {
+            write_block(i, (uint32_t *) p);
+        }
         return 1;
     }
     return 0;
