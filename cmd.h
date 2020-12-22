@@ -9,7 +9,7 @@
 void cmd_ls(char *content, int ninode);
 
 //创建文件夹
-void cmd_mkdir(char *content);
+void cmd_mkdir(char *content, int ninode);
 
 //创建文件
 void cmd_touch(char *content);

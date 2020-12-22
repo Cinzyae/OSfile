@@ -18,10 +18,9 @@ void cmd_ls(char *content, int ninode) {
     }
 
     char *next = parse_content(content);
-    memset(next++, 0, 1);
     printf("after parse:\n");
     printf("    content:%s\tnext:%s\n", content, next);
-    int inode_next = ls_sub(ninode, content);
+    int inode_next = find_next_inode(ninode, content);
     if (inode_next == -1) {
         printf("folder empty!\n");
         return;
@@ -31,39 +30,65 @@ void cmd_ls(char *content, int ninode) {
     }
 
     if (*next != '\0') {
-        // 如果仍然有下一个带访问子文件夹则递归
+        // 如果仍然有下一个待访问子文件夹则递归
         cmd_ls(next, inode_next);
         return;
     } else {
-        //TODO : 展示文件夹
+        // 展示文件夹
         show_folder(inode_next);
         printf("show folder");
     }
 }
 
 //创建文件夹
-void cmd_mkdir(char *content) {
+void cmd_mkdir(char *content, int ninode) {
     printf("run mkdir:\n");
-    int block = 0;
-    int inode = 0;
-    //set_sp_block(TYPE_FOLDER, &block, &inode);
-    //set_inode_block(TYPE_FOLDER, &block, &inode);
-
-    //修改inode块，修改对应data块为dir_item
-    //写data块
-    //返回
-
+    char *next = parse_content(content);
+    printf("after parse:\n");
+    printf("    content:%s\tnext:%s\n", content, next);
+    int inode_next = find_next_inode(ninode, content);
+    switch (inode_next) {
+        case -1://无文件夹
+            printf("folder empty!\n");
+            break;
+        case 0://无文件夹
+            printf("no such sub_folder!\n");
+            break;
+        default://有文件夹
+//            if (*next != '\0') {
+//                // 如果仍然有下一个待访问子文件夹则递归
+//                cmd_mkdir(next, inode_next);
+//                return;
+//            } else {
+//                int new_ninode = 0;
+//                int new_ndata = 0;
+//                set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
+//                if (build_new(ninode, new_ninode, new_ndata, TYPE_FOLDER, content) < 0) {
+//                    printf("mkdir folder fail.\n");
+//                    return;
+//                } else {
+//                    printf("here is free space in dir%d.\n", ninode);
+//                }
+//            }
+            break;
+    }
+    // TODO : 分情况
+    //无文件夹，无待访问——冲
+    //无文件夹，有待访问——错
+    //有文件夹，有待访问——冲
+    //有文件夹，无待访问——错
 }
+
 
 //创建文件
 void cmd_touch(char *content) {
     printf("run touch:\n");
     //读sp_block块,sp_block查空，修改sp_block块，返回可修改inode块序号
-    int ninode = 0;
-    int ndata = 0;
-    set_sp_block(TYPE_FILE, &ninode, &ndata);
+    int new_ninode = 0;
+    int new_ndata = 0;
+    set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
     //查看根目录
-    if (touch_sub(ninode, ndata, TYPE_FILE, content) < 0) {
+    if (build_new(0, new_ninode, new_ndata, TYPE_FILE, content) < 0) {
         printf("touch file fail.\n");
         return;
     } else {
@@ -129,7 +154,7 @@ void runcmd(char *buf) {
     if (strcmp(order, "ls") == 0) {
         cmd_ls(content, 0);
     } else if (strcmp(order, "mkdir") == 0) {
-        cmd_mkdir(content);
+        cmd_mkdir(content, 0);
     } else if (strcmp(order, "shutdown") == 0) {
         cmd_shutdown();
     } else if (strcmp(order, "touch") == 0) {
@@ -141,6 +166,7 @@ void runcmd(char *buf) {
     }
 }
 
+//传入命令，返回/后一位的指针
 char *parse_content(char *content) {
     char whitespace[] = " /";
     char *p = content;
@@ -148,19 +174,6 @@ char *parse_content(char *content) {
     while (strchr(whitespace, *p++) == 0) {
         next = p;
     }
+    memset(next++, 0, 1);
     return next;
 }
-//void parseline(char *str, char *strSorted[], int strSortedLen) {
-//    char *p;
-//    int len = 0;
-//    char whitespace[] = " \t\r\n\v";
-//    for (p = str; strchr(whitespace, *p); p++);
-//    while (*p && len <= strSortedLen) {
-//        strSorted[len++] = p;
-//        while (*p && !strchr(whitespace, *p))
-//            p++;
-//        while (strchr(whitespace, *p))
-//            *p++ = '\0';
-//    }
-//    strSorted[len] = 0;
-//}
