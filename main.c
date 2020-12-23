@@ -1,4 +1,4 @@
-#include <mem.h>
+#include <string.h>
 #include <stdio.h>
 #include "cmd.h"
 #include "filesys.h"

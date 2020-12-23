@@ -2,7 +2,8 @@
 // Created by MACHENIKE on 12/20/2020.
 //
 
-#include <io.h>
+
+#include <io.h>//windows
 #include "ulib.h"
 
 char *gets_ulib(char *buf, int max) {

@@ -1,7 +1,7 @@
 //
 // Created by MACHENIKE on 12/18/2020.
 //
-#include <mem.h>
+#include <string.h>
 #include <stdio.h>
 #include <malloc.h>
 #include "cmd.h"

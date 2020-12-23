@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <malloc.h>
-#include <mem.h>
+#include <string.h>
 #include "cmd_sub.h"
 
 //根据传入的ninode找到对应块，比较content与名字，返回对应的inode_id给下一次迭代

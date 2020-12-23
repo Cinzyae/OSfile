@@ -1,7 +1,7 @@
 #include <stdint.h>
-#include <mem.h>
+#include <string.h>
 #include <malloc.h>
-#include <process.h>
+#include <process.h>//windows
 #include "disk.h"
 #include "filesys.h"
 
