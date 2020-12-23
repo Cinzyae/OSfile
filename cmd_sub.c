@@ -6,6 +6,7 @@
 #include <malloc.h>
 #include <string.h>
 #include "cmd_sub.h"
+#include "ulib.h"
 
 //根据传入的ninode找到对应块，比较content与名字，返回对应的inode_id给下一次迭代
 int find_next_inode(int ninode, char *content) {
@@ -109,18 +110,29 @@ int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, cha
 //    free(q);
 //-----
     //读取、修改new_inode
+    int new_ndata1 = 0;
+    int new_ndata2 = 0;
+    int new_ndata3 = 0;
+    int new_ndata4 = 0;
+    int new_ndata5 = 0;
+    get_new_block(&new_ndata1);
+    get_new_block(&new_ndata2);
+    get_new_block(&new_ndata3);
+    get_new_block(&new_ndata4);
+    get_new_block(&new_ndata5);
+
     ino_list p2;
     read_inode(new_ninode, &p2);
     int p2_num_list = new_ninode % 32;
     p2.inodes[p2_num_list].size = 0;
     p2.inodes[p2_num_list].file_type = file_type;
     p2.inodes[p2_num_list].link = 0;
-    p2.inodes[p2_num_list].block_point[0] = new_ndata;
-    p2.inodes[p2_num_list].block_point[1] = new_ndata - 1;
-    p2.inodes[p2_num_list].block_point[2] = new_ndata - 2;
-    p2.inodes[p2_num_list].block_point[3] = new_ndata - 3;
-    p2.inodes[p2_num_list].block_point[4] = new_ndata - 4;
-    p2.inodes[p2_num_list].block_point[5] = new_ndata - 5;
+    p2.inodes[p2_num_list].block_point[0] = new_ndata;// TODO
+    p2.inodes[p2_num_list].block_point[1] = new_ndata1;
+    p2.inodes[p2_num_list].block_point[2] = new_ndata2;
+    p2.inodes[p2_num_list].block_point[3] = new_ndata3;
+    p2.inodes[p2_num_list].block_point[4] = new_ndata4;
+    p2.inodes[p2_num_list].block_point[5] = new_ndata5;
     write_inode(new_ninode, &p2);
 //    free(p2);
     return 0;
@@ -142,6 +154,68 @@ int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata) {
     if (file_type == TYPE_FOLDER)
         p->dir_inode_count += 1;
 // TODO : modify maps (bits)
+    //善后
+    write_block(0, p);
+    free(p);
+    return 0;
+}
+
+int get_new_inode(uint16_t file_type, int *new_ninode) {
+    sp_block *p = malloc(MEM_BLOCK_SIZE);
+    read_block(0, p);
+
+    //sp_block块是否有空
+    if (!(p->free_block_count) || !(p->free_inode_count))
+        return -1;
+    //修改sp_block块
+    int i;
+    unsigned int bit;
+    for (i = INODE_MAP_NUM - 1; i >= 0; i--) {
+        if (i > 60000)
+            return -1;
+        bit = bit_check(p->inode_map[i]);
+        if (bit > 60000) {
+            continue;
+        } else {
+            p->inode_map[i] = bit_set(bit, p->inode_map[i]);
+            break;
+        }
+    }
+    *new_ninode = i * 32 + bit;
+    //*new_ninode = p->free_inode_count;
+    (p->free_inode_count) -= 1;
+    if (file_type == TYPE_FOLDER)
+        p->dir_inode_count += 1;
+    //善后
+    write_block(0, p);
+    free(p);
+    return 0;
+}
+
+int get_new_block(int *new_ndata) {
+    sp_block *p = malloc(MEM_BLOCK_SIZE);
+    read_block(0, p);
+
+    //sp_block块是否有空
+    if (!(p->free_block_count) || !(p->free_inode_count))
+        return -1;
+    //修改sp_block块
+    int i;
+    unsigned int bit;
+    for (i = BLOCK_MAP_NUM - 1; i >= 0; i--) {
+        if (i > 60000)
+            return -1;
+        bit = bit_check(p->block_map[i]);
+        if (bit > 60000) {
+            continue;
+        } else {
+            p->block_map[i] = bit_set(bit, p->block_map[i]);
+            break;
+        }
+    }
+    *new_ndata = i * 32 + bit;
+    //*new_ndata = p->free_block_count;
+    (p->free_block_count) -= 1;
     //善后
     write_block(0, p);
     free(p);

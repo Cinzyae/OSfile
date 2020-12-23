@@ -15,6 +15,10 @@ int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, cha
 
 int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata);
 
+int get_new_inode(uint16_t file_type, int *new_ninode);
+
+int get_new_block(int *new_ndata);
+
 int find_the_inode(int ninode, char *content);
 
 void printf_sp_block(int i);

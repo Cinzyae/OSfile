@@ -50,7 +50,8 @@ int cmd_new(char *content, int ninode, uint16_t file_type) {
         printf("make new\n");
         int new_ninode = 0;
         int new_ndata = 0;
-        set_sp_block(file_type, &new_ninode, &new_ndata);
+        get_new_inode(file_type, &new_ninode);
+        get_new_block(&new_ndata);
         if (build_new(ninode, new_ninode, new_ndata, file_type, content) < 0) {
             printf("new fail.\n");
             return -1;
@@ -233,21 +234,43 @@ void runcmd(char *buf) {
 }
 
 void root() {
+    sp_block *sp = malloc(MEM_BLOCK_SIZE);
+    read_block(0, sp);
+    int i;
+    for (i = 0; i < 31; i++) {
+        sp->block_map[BLOCK_MAP_NUM - 1] = bit_set(i, sp->block_map[BLOCK_MAP_NUM - 1]);
+    }
+    sp->block_map[BLOCK_MAP_NUM - 2] = bit_set(31, sp->block_map[BLOCK_MAP_NUM - 2]);
+
+    write_block(0, sp);
+    free(sp);
+
     int new_ninode = 0;
     int new_ndata = 0;
-    set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
+    int new_ndata1 = 0;
+    int new_ndata2 = 0;
+    int new_ndata3 = 0;
+    int new_ndata4 = 0;
+    int new_ndata5 = 0;
+    get_new_block(&new_ndata1);
+    get_new_block(&new_ndata2);
+    get_new_block(&new_ndata3);
+    get_new_block(&new_ndata4);
+    get_new_block(&new_ndata5);
 
+    get_new_inode(TYPE_FILE, &new_ninode);
+    get_new_block(&new_ndata);
     ino_list p;
     read_inode(0, &p);
     p.inodes[0].file_type = TYPE_FOLDER;
     p.inodes[0].size = 0;
     p.inodes[0].link = 0;
     p.inodes[0].block_point[0] = new_ndata;
-    p.inodes[0].block_point[1] = new_ndata - 1;
-    p.inodes[0].block_point[2] = new_ndata - 2;
-    p.inodes[0].block_point[3] = new_ndata - 3;
-    p.inodes[0].block_point[4] = new_ndata - 4;
-    p.inodes[0].block_point[5] = new_ndata - 5;
+    p.inodes[0].block_point[1] = new_ndata1;
+    p.inodes[0].block_point[2] = new_ndata2;
+    p.inodes[0].block_point[3] = new_ndata3;
+    p.inodes[0].block_point[4] = new_ndata4;
+    p.inodes[0].block_point[5] = new_ndata5;
     write_inode(0, &p);
 //    free(p);
 }

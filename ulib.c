@@ -24,7 +24,9 @@ char *gets_ulib(char *buf, int max) {
 
 uint16_t bit_check(uint32_t int_number) {
     uint16_t i;
-    for (i = 0; i < 32; i++) {
+    for (i = 31; i >= 0; i--) {
+        if (i > 60000)
+            return -1;
         if ((int_number & (uint32_t) ((uint16_t) 1 << i)) == 0)
             return i;
     }

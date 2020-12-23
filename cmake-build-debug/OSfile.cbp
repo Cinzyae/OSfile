@@ -8,18 +8,18 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="G:/projects/OSfile/cmake-build-debug"/>
+				<Option working_dir="G:/projects/OSfile2/OSfile/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="OSfile">
-				<Option output="G:/projects/OSfile/cmake-build-debug/OSfile.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="G:/projects/OSfile/cmake-build-debug"/>
+				<Option output="G:/projects/OSfile2/OSfile/cmake-build-debug/OSfile.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="G:/projects/OSfile2/OSfile/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -29,15 +29,15 @@
 					<Add directory="G:/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 OSfile"/>
-					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 OSfile"/>
+					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="OSfile/fast">
-				<Option output="G:/projects/OSfile/cmake-build-debug/OSfile.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="G:/projects/OSfile/cmake-build-debug"/>
+				<Option output="G:/projects/OSfile2/OSfile/cmake-build-debug/OSfile.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="G:/projects/OSfile2/OSfile/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -47,67 +47,67 @@
 					<Add directory="G:/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 OSfile/fast"/>
-					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 OSfile/fast"/>
+					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="G:/projects/OSfile/cmake-build-debug"/>
+				<Option working_dir="G:/projects/OSfile2/OSfile/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="G:/projects/OSfile/cmake-build-debug"/>
+				<Option working_dir="G:/projects/OSfile2/OSfile/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/mingw32/bin/mingw32-make.exe -f &quot;G:/projects/OSfile2/OSfile/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="G:/projects/OSfile/cmd.c">
+		<Unit filename="G:/projects/OSfile2/OSfile/cmd.c">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/cmd.h">
+		<Unit filename="G:/projects/OSfile2/OSfile/cmd.h">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/cmd_sub.c">
+		<Unit filename="G:/projects/OSfile2/OSfile/cmd_sub.c">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/cmd_sub.h">
+		<Unit filename="G:/projects/OSfile2/OSfile/cmd_sub.h">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/disk.c">
+		<Unit filename="G:/projects/OSfile2/OSfile/disk.c">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/disk.h">
+		<Unit filename="G:/projects/OSfile2/OSfile/disk.h">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/filesys.c">
+		<Unit filename="G:/projects/OSfile2/OSfile/filesys.c">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/filesys.h">
+		<Unit filename="G:/projects/OSfile2/OSfile/filesys.h">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/main.c">
+		<Unit filename="G:/projects/OSfile2/OSfile/main.c">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/ulib.c">
+		<Unit filename="G:/projects/OSfile2/OSfile/ulib.c">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/ulib.h">
+		<Unit filename="G:/projects/OSfile2/OSfile/ulib.h">
 			<Option target="OSfile"/>
 		</Unit>
-		<Unit filename="G:/projects/OSfile/CMakeLists.txt">
+		<Unit filename="G:/projects/OSfile2/OSfile/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
