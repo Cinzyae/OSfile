@@ -10,6 +10,7 @@ CMakeFiles/OSfile.dir/cmd.c.obj: ../ulib.h
 CMakeFiles/OSfile.dir/cmd_sub.c.obj: ../cmd_sub.c
 CMakeFiles/OSfile.dir/cmd_sub.c.obj: ../cmd_sub.h
 CMakeFiles/OSfile.dir/cmd_sub.c.obj: ../filesys.h
+CMakeFiles/OSfile.dir/cmd_sub.c.obj: ../ulib.h
 
 CMakeFiles/OSfile.dir/disk.c.obj: ../disk.c
 CMakeFiles/OSfile.dir/disk.c.obj: ../disk.h

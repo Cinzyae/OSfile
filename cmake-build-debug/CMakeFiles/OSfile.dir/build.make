@@ -62,10 +62,10 @@ RM = G:\CLion\bin\cmake\win\bin\cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = G:\projects\OSfile
+CMAKE_SOURCE_DIR = G:\projects\OSfile2\OSfile
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = G:\projects\OSfile\cmake-build-debug
+CMAKE_BINARY_DIR = G:\projects\OSfile2\OSfile\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/OSfile.dir/depend.make
@@ -78,81 +78,81 @@ include CMakeFiles/OSfile.dir/flags.make
 
 CMakeFiles/OSfile.dir/main.c.obj: CMakeFiles/OSfile.dir/flags.make
 CMakeFiles/OSfile.dir/main.c.obj: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/OSfile.dir/main.c.obj"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\main.c.obj   -c G:\projects\OSfile\main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/OSfile.dir/main.c.obj"
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\main.c.obj   -c G:\projects\OSfile2\OSfile\main.c
 
 CMakeFiles/OSfile.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OSfile.dir/main.c.i"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile\main.c > CMakeFiles\OSfile.dir\main.c.i
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile2\OSfile\main.c > CMakeFiles\OSfile.dir\main.c.i
 
 CMakeFiles/OSfile.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OSfile.dir/main.c.s"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile\main.c -o CMakeFiles\OSfile.dir\main.c.s
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile2\OSfile\main.c -o CMakeFiles\OSfile.dir\main.c.s
 
 CMakeFiles/OSfile.dir/disk.c.obj: CMakeFiles/OSfile.dir/flags.make
 CMakeFiles/OSfile.dir/disk.c.obj: ../disk.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/OSfile.dir/disk.c.obj"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\disk.c.obj   -c G:\projects\OSfile\disk.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/OSfile.dir/disk.c.obj"
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\disk.c.obj   -c G:\projects\OSfile2\OSfile\disk.c
 
 CMakeFiles/OSfile.dir/disk.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OSfile.dir/disk.c.i"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile\disk.c > CMakeFiles\OSfile.dir\disk.c.i
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile2\OSfile\disk.c > CMakeFiles\OSfile.dir\disk.c.i
 
 CMakeFiles/OSfile.dir/disk.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OSfile.dir/disk.c.s"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile\disk.c -o CMakeFiles\OSfile.dir\disk.c.s
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile2\OSfile\disk.c -o CMakeFiles\OSfile.dir\disk.c.s
 
 CMakeFiles/OSfile.dir/filesys.c.obj: CMakeFiles/OSfile.dir/flags.make
 CMakeFiles/OSfile.dir/filesys.c.obj: ../filesys.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/OSfile.dir/filesys.c.obj"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\filesys.c.obj   -c G:\projects\OSfile\filesys.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/OSfile.dir/filesys.c.obj"
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\filesys.c.obj   -c G:\projects\OSfile2\OSfile\filesys.c
 
 CMakeFiles/OSfile.dir/filesys.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OSfile.dir/filesys.c.i"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile\filesys.c > CMakeFiles\OSfile.dir\filesys.c.i
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile2\OSfile\filesys.c > CMakeFiles\OSfile.dir\filesys.c.i
 
 CMakeFiles/OSfile.dir/filesys.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OSfile.dir/filesys.c.s"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile\filesys.c -o CMakeFiles\OSfile.dir\filesys.c.s
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile2\OSfile\filesys.c -o CMakeFiles\OSfile.dir\filesys.c.s
 
 CMakeFiles/OSfile.dir/cmd.c.obj: CMakeFiles/OSfile.dir/flags.make
 CMakeFiles/OSfile.dir/cmd.c.obj: ../cmd.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/OSfile.dir/cmd.c.obj"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\cmd.c.obj   -c G:\projects\OSfile\cmd.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/OSfile.dir/cmd.c.obj"
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\cmd.c.obj   -c G:\projects\OSfile2\OSfile\cmd.c
 
 CMakeFiles/OSfile.dir/cmd.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OSfile.dir/cmd.c.i"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile\cmd.c > CMakeFiles\OSfile.dir\cmd.c.i
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile2\OSfile\cmd.c > CMakeFiles\OSfile.dir\cmd.c.i
 
 CMakeFiles/OSfile.dir/cmd.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OSfile.dir/cmd.c.s"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile\cmd.c -o CMakeFiles\OSfile.dir\cmd.c.s
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile2\OSfile\cmd.c -o CMakeFiles\OSfile.dir\cmd.c.s
 
 CMakeFiles/OSfile.dir/ulib.c.obj: CMakeFiles/OSfile.dir/flags.make
 CMakeFiles/OSfile.dir/ulib.c.obj: ../ulib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/OSfile.dir/ulib.c.obj"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\ulib.c.obj   -c G:\projects\OSfile\ulib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/OSfile.dir/ulib.c.obj"
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\ulib.c.obj   -c G:\projects\OSfile2\OSfile\ulib.c
 
 CMakeFiles/OSfile.dir/ulib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OSfile.dir/ulib.c.i"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile\ulib.c > CMakeFiles\OSfile.dir\ulib.c.i
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile2\OSfile\ulib.c > CMakeFiles\OSfile.dir\ulib.c.i
 
 CMakeFiles/OSfile.dir/ulib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OSfile.dir/ulib.c.s"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile\ulib.c -o CMakeFiles\OSfile.dir\ulib.c.s
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile2\OSfile\ulib.c -o CMakeFiles\OSfile.dir\ulib.c.s
 
 CMakeFiles/OSfile.dir/cmd_sub.c.obj: CMakeFiles/OSfile.dir/flags.make
 CMakeFiles/OSfile.dir/cmd_sub.c.obj: ../cmd_sub.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/OSfile.dir/cmd_sub.c.obj"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\cmd_sub.c.obj   -c G:\projects\OSfile\cmd_sub.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/OSfile.dir/cmd_sub.c.obj"
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\OSfile.dir\cmd_sub.c.obj   -c G:\projects\OSfile2\OSfile\cmd_sub.c
 
 CMakeFiles/OSfile.dir/cmd_sub.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OSfile.dir/cmd_sub.c.i"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile\cmd_sub.c > CMakeFiles\OSfile.dir\cmd_sub.c.i
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\projects\OSfile2\OSfile\cmd_sub.c > CMakeFiles\OSfile.dir\cmd_sub.c.i
 
 CMakeFiles/OSfile.dir/cmd_sub.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OSfile.dir/cmd_sub.c.s"
-	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile\cmd_sub.c -o CMakeFiles\OSfile.dir\cmd_sub.c.s
+	G:\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\projects\OSfile2\OSfile\cmd_sub.c -o CMakeFiles\OSfile.dir\cmd_sub.c.s
 
 # Object files for target OSfile
 OSfile_OBJECTS = \
@@ -176,7 +176,7 @@ OSfile.exe: CMakeFiles/OSfile.dir/build.make
 OSfile.exe: CMakeFiles/OSfile.dir/linklibs.rsp
 OSfile.exe: CMakeFiles/OSfile.dir/objects1.rsp
 OSfile.exe: CMakeFiles/OSfile.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=G:\projects\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable OSfile.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable OSfile.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\OSfile.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -189,6 +189,6 @@ CMakeFiles/OSfile.dir/clean:
 .PHONY : CMakeFiles/OSfile.dir/clean
 
 CMakeFiles/OSfile.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" G:\projects\OSfile G:\projects\OSfile G:\projects\OSfile\cmake-build-debug G:\projects\OSfile\cmake-build-debug G:\projects\OSfile\cmake-build-debug\CMakeFiles\OSfile.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" G:\projects\OSfile2\OSfile G:\projects\OSfile2\OSfile G:\projects\OSfile2\OSfile\cmake-build-debug G:\projects\OSfile2\OSfile\cmake-build-debug G:\projects\OSfile2\OSfile\cmake-build-debug\CMakeFiles\OSfile.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/OSfile.dir/depend
 
