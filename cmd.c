@@ -138,10 +138,10 @@ int cmd_cp(char *content, int ninode) {
     char *next = parse_content(content, " ");
     printf("content:%s\tnext:%s\n", content, next);
     //cmd_new(next, 0, TYPE_FILE);
-
+    printf("src:%s\tdst:%s\n", next, content);
     int src = find_the_inode(0, next);
     int dst = find_the_inode(0, content);
-    printf("src:%s,%d\tdst:%s,%d\n", next, src, content, dst);
+    printf("src:%d\tdst:%d\n", src, dst);
 
     ino_list *src_inolist = NULL;
     src_inolist = malloc(sizeof(ino_list));
