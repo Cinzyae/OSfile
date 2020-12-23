@@ -134,10 +134,46 @@ void cmd_touch(char *content, int ninode) {
 
 //复制文件
 int cmd_cp(char *content, int ninode) {
-    int inode2copy;
     char *next = parse_content(content, " ");
     printf("content:%s\tnext:%s\n", content, next);
-    cmd_new(next, 0, TYPE_FILE);
+    //cmd_new(next, 0, TYPE_FILE);
+
+    int src = find_the_inode(0, content);
+    int dst = find_the_inode(0, next);
+    printf("src:%d\tdst:%d\n", src, dst);
+
+    ino_list *src_inolist = NULL;
+    src_inolist = malloc(sizeof(ino_list));
+    read_inode(src, src_inolist);
+    int src_blklist = src % 32;
+
+    ino_list *dst_inolist = NULL;
+    dst_inolist = malloc(sizeof(ino_list));
+    read_inode(dst, dst_inolist);
+    int dst_blklist = dst % 32;
+
+    printf("from%d\tto%d\n", src_inolist->inodes[src_blklist].block_point[0],
+           dst_inolist->inodes[dst_blklist].block_point[0]);
+    printf("from%d\tto%d\n", src_inolist->inodes[src_blklist].block_point[1],
+           dst_inolist->inodes[dst_blklist].block_point[1]);
+    printf("from%d\tto%d\n", src_inolist->inodes[src_blklist].block_point[2],
+           dst_inolist->inodes[dst_blklist].block_point[2]);
+    printf("from%d\tto%d\n", src_inolist->inodes[src_blklist].block_point[3],
+           dst_inolist->inodes[dst_blklist].block_point[3]);
+    printf("from%d\tto%d\n", src_inolist->inodes[src_blklist].block_point[4],
+           dst_inolist->inodes[dst_blklist].block_point[4]);
+    printf("from%d\tto%d\n", src_inolist->inodes[src_blklist].block_point[5],
+           dst_inolist->inodes[dst_blklist].block_point[5]);
+    data_cpy(src_inolist->inodes[src_blklist].block_point[0], dst_inolist->inodes[dst_blklist].block_point[0]);
+    data_cpy(src_inolist->inodes[src_blklist].block_point[1], dst_inolist->inodes[dst_blklist].block_point[1]);
+    data_cpy(src_inolist->inodes[src_blklist].block_point[2], dst_inolist->inodes[dst_blklist].block_point[2]);
+    data_cpy(src_inolist->inodes[src_blklist].block_point[3], dst_inolist->inodes[dst_blklist].block_point[3]);
+    data_cpy(src_inolist->inodes[src_blklist].block_point[4], dst_inolist->inodes[dst_blklist].block_point[4]);
+    data_cpy(src_inolist->inodes[src_blklist].block_point[5], dst_inolist->inodes[dst_blklist].block_point[5]);
+
+    free(src_inolist);
+    free(dst_inolist);
+    return 0;
 }
 
 //关闭系统
@@ -194,18 +230,6 @@ void runcmd(char *buf) {
         cmd_test(content);
     }
     printf("-------\n");
-}
-
-//传入命令，返回/后一位的指针
-char *parse_content(char *content, char *whitespace) {
-//    char whitespace[] = " /";
-    char *p = content;
-    char *next = NULL;
-    while (strchr(whitespace, *p++) == 0) {
-        next = p;
-    }
-    memset(next++, 0, 1);
-    return next;
 }
 
 void root() {

@@ -33,8 +33,6 @@ void runcmd(char *buf);
 
 void cmd_test(char *content);
 
-char *parse_content(char *content, char *whitespace);
-
 void root();
 
 #endif //OSFILE_CMD_H

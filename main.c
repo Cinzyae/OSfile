@@ -27,3 +27,4 @@ int main() {
 }
 
 // TODO : 检查返回值
+//gcc main.c cmd_sub.c cmd.c disk.c filesys.c ulib.c -o os

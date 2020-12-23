@@ -7,7 +7,7 @@
 #IncludeRegexTransform: 
 
 G:/projects/OSfile/cmd.c
-mem.h
+string.h
 -
 stdio.h
 -
@@ -24,18 +24,6 @@ G:/projects/OSfile/cmd.h
 stdint.h
 -
 
-G:/projects/OSfile/cmd_sub.c
-stdio.h
--
-stdint.h
--
-malloc.h
--
-mem.h
--
-cmd_sub.h
-G:/projects/OSfile/cmd_sub.h
-
 G:/projects/OSfile/cmd_sub.h
 filesys.h
 G:/projects/OSfile/filesys.h
@@ -43,16 +31,6 @@ G:/projects/OSfile/filesys.h
 G:/projects/OSfile/filesys.h
 stdint.h
 -
-
-G:/projects/OSfile/main.c
-mem.h
--
-stdio.h
--
-cmd.h
-G:/projects/OSfile/cmd.h
-filesys.h
-G:/projects/OSfile/filesys.h
 
 G:/projects/OSfile/ulib.h
 stdint.h

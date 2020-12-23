@@ -137,8 +137,8 @@ int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata) {
     //修改sp_block块
     *new_ninode = p->free_inode_count;
     *new_ndata = p->free_block_count;
-    (p->free_block_count) -= 1;
-    (p->free_inode_count) -= 6;
+    (p->free_block_count) -= 6;
+    (p->free_inode_count) -= 1;
     if (file_type == TYPE_FOLDER)
         p->dir_inode_count += 1;
 // TODO : modify maps (bits)
@@ -148,25 +148,22 @@ int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata) {
     return 0;
 }
 
-int find_the_node(int ninode, char *content) {
-//    int inode_next = find_next_inode(ninode, content);
-//    if (inode_next == -1) {
-//        printf("folder empty!\n");
-//        return -1;
-//    } else if (inode_next == 0) {
-//        printf("no such sub_folder!\n");
-//        return -1;
-//    }
-//    if (*next != '\0') {
-//        // 如果仍然有下一个待访问子文件夹则递归
-//        inode2copy = find_the_node(inode_next,next);
-//        return inode2copy;
-//    } else {
-//        // 返回待复制的inode
-//        return inode_next;
-//        printf("show folder:\n");
-//        show_folder(inode_next);
-//    }
+int find_the_inode(int ninode, char *content) {
+    char *next = parse_content(content, "/");
+    //printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
+    int inode_next = find_next_inode(ninode, content);
+    if (inode_next == -1) {
+        return ninode;
+    } else if (inode_next == 0) {
+        printf("no such file!\n");
+        return -1;
+    }
+    if (*next != '\0') {
+        // 如果仍然有下一个待访问子文件夹则递归
+        return find_the_inode(inode_next, next);
+    } else {
+        return inode_next;
+    }
 }
 
 void printf_sp_block(int i) {
@@ -197,4 +194,24 @@ void printf_inode_block(int ninode, int i) {
     printf("block_point[0]:%d\n", pp->inodes[pp_num_list].block_point[0]);
     printf("&&\n");
     free(pp);
+}
+
+//传入命令，返回/后一位的指针
+char *parse_content(char *content, char *whitespace) {
+//    char whitespace[] = " /";
+    char *p = content;
+    char *next = NULL;
+    while (strchr(whitespace, *p++) == 0) {
+        next = p;
+    }
+    memset(next++, 0, 1);
+    return next;
+}
+
+void data_cpy(int src, int dst) {
+    char *srcblk;
+    srcblk = malloc(MEM_BLOCK_SIZE);
+    read_block(src, srcblk);
+    write_block(dst, srcblk);
+    free(srcblk);
 }
