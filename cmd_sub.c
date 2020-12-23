@@ -52,7 +52,7 @@ int find_next_inode(int ninode, char *content) {
 int show_folder(int ninode) {
     int i, j;
     ino_list p;
-    read_inode(ninode, &p);// todo here
+    read_inode(ninode, &p);//
     int p_num_list = ninode % 32;
     int size = p.inodes[p_num_list].size;
     int group = size / 8;
@@ -109,16 +109,19 @@ int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, cha
 //    free(q);
 //-----
     //读取、修改new_inode
-    printf_inode_block(1023, 0);
     ino_list p2;
     read_inode(new_ninode, &p2);
     int p2_num_list = new_ninode % 32;
     p2.inodes[p2_num_list].size = 0;
     p2.inodes[p2_num_list].file_type = file_type;
     p2.inodes[p2_num_list].link = 0;
-    p2.inodes[p2_num_list].block_point[0] = new_ndata;//
+    p2.inodes[p2_num_list].block_point[0] = new_ndata;
+    p2.inodes[p2_num_list].block_point[1] = new_ndata-1;
+    p2.inodes[p2_num_list].block_point[2] = new_ndata-2;
+    p2.inodes[p2_num_list].block_point[3] = new_ndata-3;
+    p2.inodes[p2_num_list].block_point[4] = new_ndata-4;
+    p2.inodes[p2_num_list].block_point[5] = new_ndata-5;
     write_inode(new_ninode, &p2);
-    printf_inode_block(1023, 1);
 //    free(p2);
     return 0;
 }
@@ -135,7 +138,7 @@ int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata) {
     *new_ninode = p->free_inode_count;
     *new_ndata = p->free_block_count;
     (p->free_block_count) -= 1;
-    (p->free_inode_count) -= 1;
+    (p->free_inode_count) -= 6;
     if (file_type == TYPE_FOLDER)
         p->dir_inode_count += 1;
 // TODO : modify maps (bits)

@@ -91,7 +91,6 @@ int init_sys() {
 }
 
 void shutdown_sys() {
-    // TODO : to exit
     close_disk();
     exit(0);
 }

@@ -50,7 +50,7 @@ void cmd_mkdir(char *content, int ninode) {
         printf("make new folder\n");
         int new_ninode = 0;
         int new_ndata = 0;
-        set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
+        set_sp_block(TYPE_FOLDER, &new_ninode, &new_ndata);
         int flag = build_new(ninode, new_ninode, new_ndata, TYPE_FOLDER, content);
         if (flag < 0) {
             printf("mkdir folder fail.\n");
@@ -68,7 +68,8 @@ void cmd_mkdir(char *content, int ninode) {
 }
 
 //创建文件
-void cmd_touch(char *content) {
+void cmd_touch(char *content, int ninode) {
+    /*
     printf("run touch:\n");
     //读sp_block块,sp_block查空，修改sp_block块，返回可修改inode块序号
     int new_ninode = 0;
@@ -81,15 +82,41 @@ void cmd_touch(char *content) {
     } else {
         printf("here is free space in home dir.\n");
     }
+     */
+    printf("run mkdir:\n");
+    if (*content == '\0') {
+        printf("need a folder name\n");
+        return;
+    }
+    char *next = parse_content(content);
+    printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
+    int inode_next = find_next_inode(ninode, content);
+    if ((inode_next <= 0) && (*next == '\0')) {//无文件夹，无待访问——冲
+        printf("make new folder\n");
+        int new_ninode = 0;
+        int new_ndata = 0;
+        set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
+        int flag = build_new(ninode, new_ninode, new_ndata, TYPE_FILE, content);
+        if (flag < 0) {
+            printf("mkdir folder fail.\n");
+            return;
+        }
+    } else if ((inode_next > 0) && (*next != '\0')) {//有文件夹，有待访问——冲
+        printf("cd %s:\n", content);
+        cmd_mkdir(next, inode_next);
+        return;
+    } else {
+        //无文件夹，有待访问——错
+        //有文件夹，无待访问——错
+        printf("wrong.inode_next = %d\t *next : %s\n", inode_next, next);
+    }
 }
 
 //复制文件
-void cmd_cp() {
-
-    //读sp_block块,sp_block查空，修改sp_block块
-    //修改inode块，修改对应data块为data_item
-    //写data块
-    //返回
+void cmd_cp(char *content) {
+    // TODO
+    char *next = parse_content(content);
+    cmd_touch(next, 0);
 }
 
 //关闭系统
@@ -135,9 +162,9 @@ void runcmd(char *buf) {
     } else if (strcmp(order, "shutdown") == 0) {
         cmd_shutdown();
     } else if (strcmp(order, "touch") == 0) {
-        cmd_touch(content);
+        cmd_touch(content, 0);
     } else if (strcmp(order, "cp") == 0) {
-        cmd_cp();
+        cmd_cp(content);
     } else if (strcmp(order, "test") == 0) {
         cmd_test(content);
     }
@@ -167,6 +194,11 @@ void root() {
     p.inodes[0].size = 0;
     p.inodes[0].link = 0;
     p.inodes[0].block_point[0] = new_ndata;
+    p.inodes[0].block_point[1] = new_ndata - 1;
+    p.inodes[0].block_point[2] = new_ndata - 2;
+    p.inodes[0].block_point[3] = new_ndata - 3;
+    p.inodes[0].block_point[4] = new_ndata - 4;
+    p.inodes[0].block_point[5] = new_ndata - 5;
     write_inode(0, &p);
 //    free(p);
 }

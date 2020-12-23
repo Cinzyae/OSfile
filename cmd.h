@@ -12,10 +12,10 @@ void cmd_ls(char *content, int ninode);
 void cmd_mkdir(char *content, int ninode);
 
 //创建文件
-void cmd_touch(char *content);
+void cmd_touch(char *content, int ninode);
 
 //复制文件
-void cmd_cp();
+void cmd_cp(char *content);
 
 //关闭系统
 void cmd_shutdown();
