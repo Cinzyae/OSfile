@@ -63,7 +63,7 @@ void cmd_mkdir(char *content, int ninode) {
     } else {
         //无文件夹，有待访问——错
         //有文件夹，无待访问——错
-        printf("wrong\n");
+        printf("wrong.inode_next = %d\t *next : %s\n", inode_next, next);
     }
 }
 
@@ -101,7 +101,7 @@ void cmd_test(char *content) {
     printf("run test\n");
     sp_block *q = NULL;
     q = malloc(MEM_BLOCK_SIZE);
-    read_block(0, (uint32_t *) q);
+    read_block(0, q);
     printf("magic_num:%d\t", q->magic_num);
     printf("free_block_count:%d\t", q->free_block_count);
     printf("free_inode_count:%d\t", q->free_inode_count);
@@ -161,13 +161,12 @@ void root() {
     int new_ndata = 0;
     set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
 
-    ino_list *p = NULL;
-    p = malloc(sizeof(ino_list));
-    read_inode(0, (uint32_t *) p);
-    p->inodes[0].file_type = TYPE_FOLDER;
-    p->inodes[0].size = 0;
-    p->inodes[0].link = 0;
-    p->inodes[0].block_point[0] = new_ndata;
-    write_inode(0, (uint32_t *) p);
-    free(p);
+    ino_list p;
+    read_inode(0, &p);
+    p.inodes[0].file_type = TYPE_FOLDER;
+    p.inodes[0].size = 0;
+    p.inodes[0].link = 0;
+    p.inodes[0].block_point[0] = new_ndata;
+    write_inode(0, &p);
+//    free(p);
 }

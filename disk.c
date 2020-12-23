@@ -1,4 +1,5 @@
 #include "disk.h"
+
 #include <stdio.h>
 
 inline int get_disk_size() {
@@ -71,11 +72,3 @@ int close_disk() {
     disk = 0;
     return r;
 }
-
-// int main()
-// {
-//     create_disk();
-//     open_disk();
-//     close_disk();
-//     return 0;
-// }

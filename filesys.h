@@ -67,15 +67,15 @@ typedef struct dir_list_struct {
     dir_item dir_items[8];
 } dir_list;
 
-int write_block(unsigned int block_num, uint32_t *p);
+int write_block(unsigned int block_num, char *p);
 
-int read_block(unsigned int block_num, uint32_t *p);
+int read_block(unsigned int block_num, char *p);
 
 int find_inode_block(int ninode);
 
-int read_inode(int ninode, uint32_t *p) ;
+int read_inode(int ninode, char *p) ;
 
-int write_inode(int ninode, uint32_t *p) ;
+int write_inode(int ninode, char *p) ;
 
 void init_superBlock(sp_block *superBlock);
 
