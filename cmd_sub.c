@@ -116,11 +116,11 @@ int build_new(int ninode, int new_ninode, int new_ndata, uint16_t file_type, cha
     p2.inodes[p2_num_list].file_type = file_type;
     p2.inodes[p2_num_list].link = 0;
     p2.inodes[p2_num_list].block_point[0] = new_ndata;
-    p2.inodes[p2_num_list].block_point[1] = new_ndata-1;
-    p2.inodes[p2_num_list].block_point[2] = new_ndata-2;
-    p2.inodes[p2_num_list].block_point[3] = new_ndata-3;
-    p2.inodes[p2_num_list].block_point[4] = new_ndata-4;
-    p2.inodes[p2_num_list].block_point[5] = new_ndata-5;
+    p2.inodes[p2_num_list].block_point[1] = new_ndata - 1;
+    p2.inodes[p2_num_list].block_point[2] = new_ndata - 2;
+    p2.inodes[p2_num_list].block_point[3] = new_ndata - 3;
+    p2.inodes[p2_num_list].block_point[4] = new_ndata - 4;
+    p2.inodes[p2_num_list].block_point[5] = new_ndata - 5;
     write_inode(new_ninode, &p2);
 //    free(p2);
     return 0;
@@ -146,6 +146,27 @@ int set_sp_block(uint16_t file_type, int *new_ninode, int *new_ndata) {
     write_block(0, p);
     free(p);
     return 0;
+}
+
+int find_the_node(int ninode, char *content) {
+//    int inode_next = find_next_inode(ninode, content);
+//    if (inode_next == -1) {
+//        printf("folder empty!\n");
+//        return -1;
+//    } else if (inode_next == 0) {
+//        printf("no such sub_folder!\n");
+//        return -1;
+//    }
+//    if (*next != '\0') {
+//        // 如果仍然有下一个待访问子文件夹则递归
+//        inode2copy = find_the_node(inode_next,next);
+//        return inode2copy;
+//    } else {
+//        // 返回待复制的inode
+//        return inode_next;
+//        printf("show folder:\n");
+//        show_folder(inode_next);
+//    }
 }
 
 void printf_sp_block(int i) {

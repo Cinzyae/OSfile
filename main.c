@@ -27,4 +27,3 @@ int main() {
 }
 
 // TODO : 检查返回值
-// TODO : 给inode分配6个块或者多分配一个数据块,分离set_sp_block

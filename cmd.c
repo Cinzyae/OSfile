@@ -15,7 +15,7 @@ void cmd_ls(char *content, int ninode) {
         show_folder(ninode);
         return;
     }
-    char *next = parse_content(content);
+    char *next = parse_content(content, "/");
     printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
     int inode_next = find_next_inode(ninode, content);
     if (inode_next == -1) {
@@ -36,6 +36,38 @@ void cmd_ls(char *content, int ninode) {
     }
 }
 
+//创建
+int cmd_new(char *content, int ninode, uint16_t file_type) {
+    printf("run new:\n");
+    if (*content == '\0') {
+        printf("need a name\n");
+        return -1;
+    }
+    char *next = parse_content(content, "/");
+    printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
+    int inode_next = find_next_inode(ninode, content);
+    if ((inode_next <= 0) && (*next == '\0')) {//无文件夹，无待访问——冲
+        printf("make new\n");
+        int new_ninode = 0;
+        int new_ndata = 0;
+        set_sp_block(file_type, &new_ninode, &new_ndata);
+        if (build_new(ninode, new_ninode, new_ndata, file_type, content) < 0) {
+            printf("new fail.\n");
+            return -1;
+        }
+        return 0;
+    } else if ((inode_next > 0) && (*next != '\0')) {//有文件夹，有待访问——冲
+        printf("cd %s:\n", content);
+        return cmd_new(next, inode_next, file_type);
+    } else {
+        //无文件夹，有待访问——错
+        //有文件夹，无待访问——错
+        printf("wrong.inode_next = %d\t *next : %s\n", inode_next, next);
+        return -1;
+    }
+}
+
+/*
 //创建文件夹
 void cmd_mkdir(char *content, int ninode) {
     printf("run mkdir:\n");
@@ -43,7 +75,7 @@ void cmd_mkdir(char *content, int ninode) {
         printf("need a folder name\n");
         return;
     }
-    char *next = parse_content(content);
+    char *next = parse_content(content, "/");
     printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
     int inode_next = find_next_inode(ninode, content);
     if ((inode_next <= 0) && (*next == '\0')) {//无文件夹，无待访问——冲
@@ -69,26 +101,12 @@ void cmd_mkdir(char *content, int ninode) {
 
 //创建文件
 void cmd_touch(char *content, int ninode) {
-    /*
-    printf("run touch:\n");
-    //读sp_block块,sp_block查空，修改sp_block块，返回可修改inode块序号
-    int new_ninode = 0;
-    int new_ndata = 0;
-    set_sp_block(TYPE_FILE, &new_ninode, &new_ndata);
-    //查看根目录
-    if (build_new(0, new_ninode, new_ndata, TYPE_FILE, content) < 0) {
-        printf("touch file fail.\n");
-        return;
-    } else {
-        printf("here is free space in home dir.\n");
-    }
-     */
     printf("run mkdir:\n");
     if (*content == '\0') {
         printf("need a folder name\n");
         return;
     }
-    char *next = parse_content(content);
+    char *next = parse_content(content, "/");
     printf("after parse:\tcontent:%s\tnext:%s\n", content, next);
     int inode_next = find_next_inode(ninode, content);
     if ((inode_next <= 0) && (*next == '\0')) {//无文件夹，无待访问——冲
@@ -112,11 +130,14 @@ void cmd_touch(char *content, int ninode) {
     }
 }
 
+*/
+
 //复制文件
-void cmd_cp(char *content) {
-    // TODO
-    char *next = parse_content(content);
-    cmd_touch(next, 0);
+int cmd_cp(char *content, int ninode) {
+    int inode2copy;
+    char *next = parse_content(content, " ");
+    printf("content:%s\tnext:%s\n", content, next);
+    cmd_new(next, 0, TYPE_FILE);
 }
 
 //关闭系统
@@ -158,13 +179,17 @@ void runcmd(char *buf) {
     if (strcmp(order, "ls") == 0) {
         cmd_ls(content, 0);
     } else if (strcmp(order, "mkdir") == 0) {
-        cmd_mkdir(content, 0);
+//        cmd_mkdir(content, 0);
+        cmd_new(content, 0, TYPE_FOLDER);
+    } else if (strcmp(order, "touch") == 0) {
+//        cmd_touch(content, 0);
+        cmd_new(content, 0, TYPE_FILE);
+    } else if (strcmp(order, "cp") == 0) {
+        cmd_cp(content, 0);
     } else if (strcmp(order, "shutdown") == 0) {
         cmd_shutdown();
-    } else if (strcmp(order, "touch") == 0) {
-        cmd_touch(content, 0);
-    } else if (strcmp(order, "cp") == 0) {
-        cmd_cp(content);
+    } else if (strcmp(order, "new") == 0) {
+        cmd_new(content, 0, TYPE_FOLDER);
     } else if (strcmp(order, "test") == 0) {
         cmd_test(content);
     }
@@ -172,8 +197,8 @@ void runcmd(char *buf) {
 }
 
 //传入命令，返回/后一位的指针
-char *parse_content(char *content) {
-    char whitespace[] = " /";
+char *parse_content(char *content, char *whitespace) {
+//    char whitespace[] = " /";
     char *p = content;
     char *next = NULL;
     while (strchr(whitespace, *p++) == 0) {
