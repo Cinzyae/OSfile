@@ -1,4 +1,4 @@
-G:\CLion\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" G:\projects\OSfile2\OSfile
+G:\CLion\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" G:\projects\OSfile\OSfile
 -- The C compiler identification is GNU 8.1.0
 -- Check for working C compiler: G:/mingw32/bin/gcc.exe
 -- Check for working C compiler: G:/mingw32/bin/gcc.exe - works
@@ -8,4 +8,4 @@ G:\CLion\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - M
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: G:/projects/OSfile2/OSfile/cmake-build-debug
+-- Build files have been written to: G:/projects/OSfile/OSfile/cmake-build-debug

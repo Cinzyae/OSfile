@@ -1,3 +1,3 @@
-G:/projects/OSfile2/OSfile/cmake-build-debug/CMakeFiles/OSfile.dir
-G:/projects/OSfile2/OSfile/cmake-build-debug/CMakeFiles/edit_cache.dir
-G:/projects/OSfile2/OSfile/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+G:/projects/OSfile/OSfile/cmake-build-debug/CMakeFiles/OSfile.dir
+G:/projects/OSfile/OSfile/cmake-build-debug/CMakeFiles/edit_cache.dir
+G:/projects/OSfile/OSfile/cmake-build-debug/CMakeFiles/rebuild_cache.dir

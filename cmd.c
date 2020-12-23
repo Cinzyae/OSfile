@@ -139,9 +139,9 @@ int cmd_cp(char *content, int ninode) {
     printf("content:%s\tnext:%s\n", content, next);
     //cmd_new(next, 0, TYPE_FILE);
 
-    int src = find_the_inode(0, content);
-    int dst = find_the_inode(0, next);
-    printf("src:%d\tdst:%d\n", src, dst);
+    int src = find_the_inode(0, next);
+    int dst = find_the_inode(0, content);
+    printf("src:%s,%d\tdst:%s,%d\n", next, src, content, dst);
 
     ino_list *src_inolist = NULL;
     src_inolist = malloc(sizeof(ino_list));
